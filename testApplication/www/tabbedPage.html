@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="stylesheet" type="text/css" href="css/tabbedPage.css" />
+  <title>Sculder</title>
+</head>
+
+<body>
+  <header>
+    <h1>Sculder</h1>
+  </header>
+
+  <div id="wrapper">
+    <div id="main-content">
+      <div id="pages">
+        <div id="map" class="current">
+          <label>Map Test</label>
+        </div>
+        <div id="camera">
+          <label>Camera Test</label>
+        </div>
+        <div id="twitter">
+          <label>Twitter Test</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <ul id="tab-bar">
+      <li>
+        <a href="#map">Map</a>
+      </li>
+
+      <li>
+        <a href="#camera">Camera</a>
+      </li>
+
+      <li>
+        <a href="#twitter">Twitter</a>
+      </li>
+    </ul>
+  </footer>
+
+  <script src="js/jquery.js">
+        $('#tab-bar a').on('click', function(e){
+          alert("Here!!");
+            e.preventDefault();
+            var nextPage = $(e.target.hash);
+            $("#pages .current").removeClass("current");
+            nextPage.addClass("current");
+        });
+  </script>
+  <script src="js/iscroll-lite.js"></script>
+  <script src="js/tabbedPage.js">
+    var theScroll;
+    function scroll(){
+        theScroll = new iScroll('wrapper');
+    }
+
+    document.addEventListener('DOMContentLoaded', scroll, false);
+
+    function page(toPage) {
+        var toPage = $(toPage),
+        fromPage = $("#pages .current");
+        if(toPage.hasClass("current") || toPage === fromPage) {
+            return;
+        };
+        toPage.addClass("current fade in").one("webkitAnimationEnd", function(){
+            fromPage.removeClass("current fade out");
+            toPage.removeClass("fade in")
+        });
+        fromPage.addClass("fade out");
+    }
+  </script>
+</body>
+
+</html>
